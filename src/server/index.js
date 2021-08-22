@@ -1,43 +1,6 @@
 const CSVtoJSON = require("csvtojson");
 var ipl = require('./ipl');
 
-
-
-// Top 10 economical bowlers in the year 2015
-
-function topTenEconomicalBowlersIn2015(matches, deliveries) {
-  let arrOfInningsOf2015 = matches
-    .filter((x) => x["season"] == 2015)
-    .map((match) => match.id);
-  let arrOfDeliveriesOf2015 = deliveries.filter((x) =>
-    arrOfInningsOf2015.includes(x["match_id"])
-  );
-  let listOfBowlers = [...new Set(arrOfDeliveriesOf2015.map((x) => x.bowler))];
-  let noOfOversPerBowler = {};
-  for (let i = 0; i < arrOfDeliveriesOf2015.length; i++) {
-    let eachBowlerOvers = [];
-    let setOfOvers = new Set();
-    let economyRate;
-    if (noOfOversPerBowler.hasOwnProperty("bowler")) {
-      i++;
-    } else {
-      eachBowlerOvers = arrOfDeliveriesOf2015.filter(
-        (x) => x["bowler"] == arrOfDeliveriesOf2015[i]["bowler"]
-      );
-      setOfOvers.add(eachBowlerOvers.map((x) => x["over"]));
-      let totalRuns = eachBowlerOvers
-        .map((x) => Number(x["total_runs"]))
-        .reduce((a, b) => a + b, 0);
-      economyRate = (totalRuns / (setOfOvers.size * 6)).toFixed(2);
-    }
-    noOfOversPerBowler[arrOfDeliveriesOf2015[i]["bowler"]] = economyRate;
-  }
-  const sortable = Object.entries(noOfOversPerBowler)
-    .sort(([, a], [, b]) => a - b)
-    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-  return Object.keys(sortable).slice(0, 10);
-}
-
 //Find the number of times each team won the toss and also won the match
 
 function numberOfTimesWonTossAndMatch(matches) {
@@ -194,8 +157,8 @@ CSVtoJSON()
       .then((deliveries) => {
         // console.log(deliveries);
         // console.log(matches);
-        console.log(ipl.runsConcededPerTeam(matches, deliveries, 2016));
-        // console.log(topTenEconomicalBowlersIn2015(matches, deliveries));
+        // console.log(ipl.runsConcededPerTeam(matches, deliveries, 2016));
+        console.log(ipl.topTenEconomicalBowlers(matches, deliveries, 2015));
         // console.log(strikeRateOfABatsman(matches, deliveries));
         // console.log(matchID(matches));
         // console.log(bestEconomyInSuperOvers(matches, deliveries));

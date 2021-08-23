@@ -2,7 +2,7 @@
 
 Step 1: Copy the url and clone the repository by running the following command.
 ```bash
-gh repo clone agarwalbipasha/bipasha_IPL_Project
+git clone https://github.com/agarwalbipasha/bipasha_IPL_Project.git
 ```
 Step 2: Change the directory to the project folder.
 ```bash

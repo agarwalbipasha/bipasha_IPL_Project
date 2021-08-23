@@ -69,8 +69,8 @@ CSVtoJSON()
   .then((matches) => {
     // console.log(matches);
     // console.log(matchesPerSeason(matches));
-    // console.log(ipl.matchesWonPerTeamPerYear(matches));
-    // console.log(ipl.getMatchesPlayedPerYear(matches));
+    console.log(ipl.matchesWonPerTeamPerYear(matches));
+    console.log(ipl.getMatchesPlayedPerYear(matches));
     // console.log(ipl.numberOfTimesWonTossAndMatch(matches));
     // console.log(ipl.playerOfMatchInEachSeason(matches));
     // console.log(ipl.getMatchesPlayedInAYear(matches, 2015));
@@ -81,9 +81,9 @@ CSVtoJSON()
       .then((deliveries) => {
         // console.log(deliveries);
         // console.log(matches);
-        // console.log(ipl.runsConcededPerTeam(matches, deliveries, 2016));
-        // console.log(ipl.topTenEconomicalBowlers(matches, deliveries, 2015));
-        console.log(ipl.strikeRateOfABatsman(matches, deliveries, "DJ Hooda"));
+        console.log(ipl.runsConcededPerTeam(matches, deliveries, 2016));
+        console.log(ipl.topTenEconomicalBowlers(matches, deliveries, 2015));
+        // console.log(ipl.strikeRateOfABatsman(matches, deliveries, "DJ Hooda"));
         // console.log(matchID(matches));
         // console.log(bestEconomyInSuperOvers(matches, deliveries));
         // console.log(highestCountOfPlayerDismissal(deliveries));

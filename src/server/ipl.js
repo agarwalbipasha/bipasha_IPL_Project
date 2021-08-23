@@ -168,36 +168,32 @@ function playerOfSeason(match) {
 
 //Find the strike rate of a batsman for each season
 
-function strikeRateOfABatsman(matches, deliveries) {
+function strikeRateOfABatsman(matches, deliveries, batsman) {
   let strikeRateOfABatsman = [];
-  let setOfBatsman = new Set(deliveries.map((x) => x.batsman));
-  let arrOfBatsman = Array.from(setOfBatsman);
   let delivery, deliveryPerMatchId, strikeRate;
-  for (let i = 0; i < arrOfBatsman.length; i++) {
-    let obj = {};
-    let objBatsman = {};
-    delivery = deliveries.filter((x) => x["batsman"] == arrOfBatsman[i]);
-    for (let j = 0; j < delivery.length; j++) {
-      deliveryPerMatchId = delivery.filter(
-        (x) => x["match_id"] == delivery[j]["match_id"]
+  let obj = {};
+  let objBatsman = {};
+  delivery = deliveries.filter((x) => x["batsman"] == batsman);
+  for (let j = 0; j < delivery.length; j++) {
+    deliveryPerMatchId = delivery.filter(
+      (x) => x["match_id"] == delivery[j]["match_id"]
       );
-      let id = delivery[j]["match_id"];
-      let noOfBalls = deliveryPerMatchId.length;
-      let totalRuns = deliveryPerMatchId
-        .map((x) => Number(x["total_runs"]))
-        .reduce((a, b) => a + b, 0);
-      strikeRate = ((totalRuns / noOfBalls) * 100).toFixed(2);
-      let season;
-      for (let m = 0; m < matches.length; m++) {
-        if (id == matches[m]["id"]) {
-          season = matches[m]["season"];
-        }
+    let id = delivery[j]["match_id"];
+    let noOfBalls = deliveryPerMatchId.length;
+    let totalRuns = deliveryPerMatchId
+      .map((x) => Number(x["total_runs"]))
+      .reduce((a, b) => a + b, 0);
+    strikeRate = ((totalRuns / noOfBalls) * 100).toFixed(2);
+    let season;
+    for (let m = 0; m < matches.length; m++) {
+      if (id == matches[m]["id"]) {
+        season = matches[m]["season"];
       }
-      obj[season] = strikeRate;
-      objBatsman[delivery[j]["batsman"]] = obj;
     }
-    strikeRateOfABatsman.push(objBatsman);
+    obj[season] = strikeRate;
+    objBatsman[delivery[j]["batsman"]] = obj;
   }
+  strikeRateOfABatsman.push(objBatsman);
   return strikeRateOfABatsman;
 }
 
